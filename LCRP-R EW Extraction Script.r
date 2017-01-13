@@ -23,7 +23,7 @@
 ################################################################################
 
 
-database.id <- 5130
+database.id <- 6354
 
 # Uncomment the following command if you want to log in manually, leave commented
 # out if you have stored your login credentials on your local machine.
@@ -429,7 +429,7 @@ colnames(values)[ncol(values)]<- "cadCod"
 ###
 
 db.5130ew.lcrp <- values
-outfilname<- paste("D:/R/Governorate/Dbs/",paste(Sys.Date(), "_ew.csv", sep=""), sep="")
+outfilname<- paste("C:\\Work/Information Management/AI Extractions/DBs/",paste(Sys.Date(), "_ew.csv", sep=""), sep="")
 write.csv(db.5130ew.lcrp,outfilname)
 outfilname4<- paste("S:/5- Emergency/Syrian Emergency/Information Management/UNICEF_LBN_Information-Management/05_Tools/14_Dashboards/Dashboard 2015/governorate/Dbs/",paste(Sys.Date(), "_ew.csv", sep=""), sep="")
 write.csv(db.5130ew.lcrp,outfilname4)

@@ -436,7 +436,7 @@ colnames(values)[ncol(values)]<- "cadCod"
 ###
 
 db.5003liv.lcrp <- values
-outfilname<- paste("D:/R/Governorate/Dbs/",paste(Sys.Date(), "_liv.csv", sep=""), sep="")
+outfilname<- paste("C:\\Work/Information Management/AI Extractions/DBs/",paste(Sys.Date(), "_liv.csv", sep=""), sep="")
 write.csv(db.5003liv.lcrp,outfilname)
 outfilname4<- paste("S:/5- Emergency/Syrian Emergency/Information Management/UNICEF_LBN_Information-Management/05_Tools/14_Dashboards/Dashboard 2015/governorate/Dbs/",paste(Sys.Date(), "_liv.csv", sep=""), sep="")
 write.csv(db.5003liv.lcrp,outfilname4)
@@ -448,10 +448,10 @@ write.csv(db.5003liv.lcrp,outfilname4)
 #rm(list = setdiff(ls(), "db.1662.3rp"))
 
 
-library("xlsx", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("reshape", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("plyr", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("zoo", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
+library("xlsx", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("reshape", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("plyr", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("zoo", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
 
 AI15<- db.5003liv.lcrp
 names(AI15)[1]<-paste("cadastral.area")
@@ -479,7 +479,7 @@ liv<- aggregate(value ~ databaseId+ month+cadastral.area+cadCod, FUN=sum)
 liv<- cast(liv,databaseId+cadastral.area+cadCod~month,fun.aggregate=sum, value="value")
 liv<- arrange(liv,databaseId, cadastral.area,cadCod)
 
-library("lubridate", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
+library("lubridate", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
 data_ind$Total<- 0
 liv$Total<- 0
 for (j in months_seq){ 

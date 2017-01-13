@@ -25,11 +25,12 @@
 opt <- options(warn = -1)
 rm(list = ls())
 
+
 library("activityinfo")
 library("httr")
 
 # Replace 'NA' with the numeric identifier of your database (e.g. 1234):
-database.id <- 5120
+database.id <- 6352
 
 # Uncomment the following command if you want to log in manually, leave commented
 # out if you have stored your login credentials on your local machine.
@@ -434,30 +435,28 @@ colnames(values)[ncol(values)]<- "cadCod"
 #options(opt)
 ###
 
-db.1883sgbv.lcrp <- values
-outfilname<- paste("C:\\Work/Information Management/AI Extractions/DBs/",paste(Sys.Date(), "_GBV.csv", sep=""), sep="")
-write.csv(db.1883sgbv.lcrp,outfilname)
-outfilname4<- paste("S:/5- Emergency/Syrian Emergency/Information Management/UNICEF_LBN_Information-Management/05_Tools/14_Dashboards/Dashboard 2015/governorate/Dbs/",paste(Sys.Date(), "_GBV.csv", sep=""), sep="")
-write.csv(db.1883sgbv.lcrp,outfilname4)
+db.4901ba.lcrp <- values
+outfilname<- paste("C:\\Work/Information Management/AI Extractions/DBs/",paste(Sys.Date(), "_ppl.csv", sep=""), sep="")
+write.csv(db.4901ba.lcrp, outfilname)
 
-
-#write.csv(values,"d:\\R\\sgbv.csv")
+#write.csv(values,"d:\\R\\h.csv")
 ### Clean unused elements
 
 # You can do the following to keep just the object(s) that you want:
 #rm(list = setdiff(ls(), "db.1662.3rp"))
 
-library("xlsx", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
-library("reshape", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("plyr", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("zoo", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
 
-AI15<- db.1883sgbv.lcrp
+library("xlsx")
+library("reshape")
+library("plyr")
+library("zoo")
+
+AI15<- db.4901ba.lcrp
 names(AI15)[1]<-paste("cadastral.area")
 AI15$month<- as.yearmon(AI15$month)
 
-AI15<- subset(AI15, AI15$"Funded.by"=="UNICEF" & AI15$month>=as.yearmon("2016-01") & AI15$month<as.yearmon(as.character(Sys.Date())))
-AI15g<- AI15
+AI15<- subset(AI15, (AI15$"partnerName"=="UNICEF" | AI15$"Funded.by"=="UNICEF") & AI15$month>=as.yearmon("2016-01") & AI15$month<as.yearmon(as.character(Sys.Date())))
+AI15g<-AI15
 months_seq<-unique(AI15$month)[order(unique(AI15$month))]
 attach(AI15)
 
@@ -473,16 +472,14 @@ data_ind<- aggregate(value ~ database+ month+indicatorId +indicatorName, FUN=sum
 data_ind<- cast(data_ind,database+indicatorId +indicatorName~month,fun.aggregate=sum, value="value")
 data_ind<- arrange(data_ind,database, indicatorId,indicatorName)
 #data_ind<- as.data.frame(append(data_ind, list(Target = NA), after = 3))
-gbv<- aggregate(value ~ databaseId+ month+cadastral.area+cadCod, FUN=sum)
+ba<- aggregate(value ~ databaseId+ month+cadastral.area+cadCod, FUN=sum)
 
-gbv<- cast(gbv,databaseId+cadastral.area+cadCod~month,fun.aggregate=sum, value="value")
-gbv<- arrange(gbv,databaseId, cadastral.area,cadCod)
-
-
+ba<- cast(ba,databaseId+cadastral.area+cadCod~month,fun.aggregate=sum, value="value")
+ba<- arrange(ba,databaseId, cadastral.area,cadCod)
 
 library("lubridate", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
 data_ind$Total<- 0
-gbv$Total<- 0
+ba$Total<- 0
 for (j in months_seq){ 
   j<-as.character(as.yearmon(j))
   for (i in colnames(data_ind)){
@@ -497,20 +494,19 @@ data_ind_clean<- data_ind[, -which(names(data_ind) %in% c(as.character(months_se
 
 for (j in months_seq){ 
   j<-as.character(as.yearmon(j))
-  for (i in colnames(gbv)){
+  for (i in colnames(ba)){
     if(i==j){
-      gbv[[paste("Total")]]<- gbv[[paste("Total")]] +gbv[[i]]
-      gbv[[paste("cum",j,sep=" ")]]<- gbv[[paste("Total")]]
+      ba[[paste("Total")]]<- ba[[paste("Total")]] +ba[[i]]
+      ba[[paste("cum",j,sep=" ")]]<- ba[[paste("Total")]]
       break 
     }
   }
 }
 
-gbv<- gbv[, -which(names(gbv) %in% c(as.character(months_seq),"Total"))]
+ba<- ba[, -which(names(ba) %in% c(as.character(months_seq),"Total"))]
 
-write.xlsx2(data_ind_clean,"d:/R/Governorate/sgbv_national.xlsx")
-write.xlsx2(data_ind_clean, "S:/5- Emergency/Syrian Emergency/Information Management/UNICEF_LBN_Information-Management/05_Tools/14_Dashboards/Dashboard 2015/sgbv_national.xlsx")
-
+write.xlsx(data_ind_clean,"d:/R/Governorate/h_national.xlsx")
+write.xlsx2(data_ind_clean, "S:/5- Emergency/Syrian Emergency/Information Management/UNICEF_LBN_Information-Management/05_Tools/14_Dashboards/Dashboard 2015/h_national.xlsx")
 
 #### creating governorate level reports######
 attach(AI15g)
@@ -537,12 +533,10 @@ attach(data_ind_g_clean)
 for (i in unique(governorate)[!is.na(unique(governorate))]) {
   #assign(paste("data",i), subset(data_ind_g, governorate==i))
   db <- paste("data",i)
-  outfilname2<- paste("d:/R/Governorate/",paste(i,"/",i, "_sgbv.xlsx", sep=""), sep="")
+  outfilname2<- paste("d:/R/Governorate/",paste(i,"/",i, "_h.xlsx", sep=""), sep="")
   write.xlsx2(subset(data_ind_g_clean, governorate==i, select=-c(governorate)),outfilname2)
-  outfilname3<- paste("S:/5- Emergency/Syrian Emergency/Information Management/UNICEF_LBN_Information-Management/05_Tools/14_Dashboards/Dashboard 2015/governorate/",paste(i,"/",i, "_sgbv.xlsx", sep=""), sep="")
+  outfilname3<- paste("S:/5- Emergency/Syrian Emergency/Information Management/UNICEF_LBN_Information-Management/05_Tools/14_Dashboards/Dashboard 2015/governorate/",paste(i,"/",i, "_h.xlsx", sep=""), sep="")
   write.xlsx2(subset(data_ind_g_clean, governorate==i, select=-c(governorate)),outfilname3)
-  
 }
 
-rm(AI15,AI15g,activities.table,admin.levels.table,attributes,data_ind,data_ind_clean,location.types.table,sites,sites1,sites2,sites.wide2,sites.wide,values,cad_cod,data_ind_g,data_ind_g_clean)
-
+rm(AI15,AI15g,activities.table,admin.levels.table,attributes,data_ind,data_ind_clean,location.types.table,sites,sites.wide,values,cad_cod,data_ind_g,data_ind_g_clean)

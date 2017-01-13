@@ -30,7 +30,7 @@ library("activityinfo")
 library("httr")
 
 # Replace 'NA' with the numeric identifier of your database (e.g. 1234):
-database.id <- 5047
+database.id <- 6262
 
 # Uncomment the following command if you want to log in manually, leave commented
 # out if you have stored your login credentials on your local machine.
@@ -452,7 +452,7 @@ colnames(values)[ncol(values)]<- "cadCod"
 #AI15_cp<- subset(AI15_cp, AI15_cp$month>=as.yearmon("2015-01"))
 
 db.1884.lcrp <- values
-outfilname<- paste("D:/R/Governorate/Dbs/",paste(Sys.Date(), "_CP.csv", sep=""), sep="")
+outfilname<- paste("C:\\Work/Information Management/AI Extractions/DBs/",paste(Sys.Date(), "_CP.csv", sep=""), sep="")
 write.csv(db.1884.lcrp,outfilname)
 outfilname4<- paste("S:/5- Emergency/Syrian Emergency/Information Management/UNICEF_LBN_Information-Management/05_Tools/14_Dashboards/Dashboard 2015/governorate/Dbs/",paste(Sys.Date(), "_CP.csv", sep=""), sep="")
 write.csv(db.1884.lcrp,outfilname4)
@@ -463,12 +463,12 @@ write.csv(db.1884.lcrp,outfilname4)
 
 # You can do the following to keep just the object(s) that you want:
 #rm(list = setdiff(ls(), "db.1662.3rp"))
-library("plyr", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("reshape", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("xlsx", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("reshape2", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("lubridate", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("zoo", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
+library("plyr", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("reshape", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("xlsx", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("reshape2", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("lubridate", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("zoo", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
 
 #Assign another name for db 1884
 AI15<- db.1884.lcrp
@@ -497,7 +497,7 @@ cp<- aggregate(value ~ databaseId+ month+cadastral.area+cadCod, FUN=sum)
 cp<- cast(cp,databaseId+cadastral.area+cadCod~month,fun.aggregate=sum, value="value")
 cp<- arrange(cp,databaseId, cadastral.area,cadCod)
 #data_ind<- as.data.frame(append(data_ind, list(Target = NA), after = 3))
-library("lubridate", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
+library("lubridate", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
 data_ind$Total<- 0
 cp$Total<- 0
 
@@ -563,4 +563,3 @@ for (i in unique(governorate)[!is.na(unique(governorate))]) {
 }
 
 rm(AI15,AI15g,activities.table,admin.levels.table,attributes,data_ind,data_ind_clean,location.types.table,sites,sites.wide,values,cad_cod,data_ind_g,data_ind_clean_g)
-

@@ -30,7 +30,7 @@ library("activityinfo")
 library("httr")
 
 # Replace 'NA' with the numeric identifier of your database (e.g. 1234):
-database.id <- 4957
+database.id <- 6157
 
 # Uncomment the following command if you want to log in manually, leave commented
 # out if you have stored your login credentials on your local machine.
@@ -437,7 +437,7 @@ colnames(values)[ncol(values)]<- "cadCod"
 ###
 
 db.1890h.lcrp <- values
-outfilname<- paste("D:/R/Governorate/Dbs/",paste(Sys.Date(), "_H.csv", sep=""), sep="")
+outfilname<- paste("C:\\Work/Information Management/AI Extractions/DBs/",paste(Sys.Date(), "_H.csv", sep=""), sep="")
 write.csv(db.1890h.lcrp,outfilname)
 outfilname4<- paste("S:/5- Emergency/Syrian Emergency/Information Management/UNICEF_LBN_Information-Management/05_Tools/14_Dashboards/Dashboard 2015/governorate/Dbs/",paste(Sys.Date(), "_H.csv", sep=""), sep="")
 write.csv(db.1890h.lcrp,outfilname4)
@@ -449,10 +449,10 @@ write.csv(db.1890h.lcrp,outfilname4)
 #rm(list = setdiff(ls(), "db.1662.3rp"))
 
 
-library("xlsx", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("reshape", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("plyr", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("zoo", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
+library("xlsx", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("reshape", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("plyr", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("zoo", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
 
 AI15<- db.1890h.lcrp
 
@@ -480,7 +480,7 @@ hn<- aggregate(value ~ databaseId+ month+cadastral.area+cadCod, FUN=sum)
 hn<- cast(hn,databaseId+cadastral.area+cadCod~month,fun.aggregate=sum, value="value")
 hn<- arrange(hn,databaseId, cadastral.area,cadCod)
 
-library("lubridate", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
+library("lubridate", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
 data_ind$Total<- 0
 hn$Total<- 0
 for (j in months_seq){ 

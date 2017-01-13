@@ -29,7 +29,7 @@ library("activityinfo")
 library("httr")
 
 # Replace 'NA' with the numeric identifier of your database (e.g. 1234):
-database.id <- 4994
+database.id <- 6390
 
 # Uncomment the following command if you want to log in manually, leave commented
 # out if you have stored your login credentials on your local machine.
@@ -436,9 +436,9 @@ colnames(values)[ncol(values)]<- "cadCod"
 
 
 db.1889ed.lcrp <- values
-outfilname<- paste("D:/R/Governorate/Dbs/",paste(Sys.Date(), "_ED.csv", sep=""), sep="")
+outfilname<- paste("C:\\Work/Information Management/AI Extractions/DBs/",paste(Sys.Date(), "_ED.csv", sep=""), sep="")
 write.csv(db.1889ed.lcrp,outfilname)
-outfilname4<- paste("S:/5- Emergency/Syrian Emergency/Information Management/UNICEF_LBN_Information-Management/05_Tools/14_Dashboards/Dashboard 2015/governorate/Dbs/",paste(Sys.Date(), "_ED.csv", sep=""), sep="")
+outfilname4<- paste("C:\\Work/Information Management/AI Extractions/DBs/",paste(Sys.Date(), "_ED.csv", sep=""), sep="")
 write.csv(db.1889ed.lcrp,outfilname4)
 
 
@@ -448,10 +448,10 @@ write.csv(db.1889ed.lcrp,outfilname4)
 # You can do the following to keep just the object(s) that you want:
 #rm(list = setdiff(ls(), "db.1662.3rp"))
 
-library("xlsx", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("reshape", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("plyr", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
-library("zoo", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
+library("xlsx", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("reshape", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("plyr", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
+library("zoo", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
 
 AI15<- db.1889ed.lcrp
 names(AI15)[1]<-paste("cadastral.area")
@@ -481,7 +481,7 @@ ed<- arrange(ed,databaseId, cadastral.area,cadCod)
 
 #ed <- merge(ed, cad_cod, by.x="cadastral.area",by.y="X2", all.x=TRUE)
 
-library("lubridate", lib.loc="d:/Program Files/RRO/R-3.1.2/library")
+library("lubridate", lib.loc="C:\\Users/rabdelsater/Documents/R/R-3.3.2/library/")
 data_ind$Total<- 0
 ed$Total<- 0
 for (j in months_seq){ 
@@ -512,8 +512,8 @@ ed<- ed[, -which(names(ed) %in% c(as.character(months_seq),"Total"))]
 
 
 
-write.xlsx(data_ind_clean,"d:/R/Governorate/ed_national.xlsx")
-write.xlsx(data_ind_clean, "S:/5- Emergency/Syrian Emergency/Information Management/UNICEF_LBN_Information-Management/05_Tools/14_Dashboards/Dashboard 2015/ed_national.xlsx")
+write.xlsx(data_ind_clean,"C:\\Work/Information Management/AI Extractions/DBs/")
+write.xlsx(data_ind_clean, "C:\\Work/Information Management/AI Extractions/DBs/")
 
 
 #### creating governorate level reports######
