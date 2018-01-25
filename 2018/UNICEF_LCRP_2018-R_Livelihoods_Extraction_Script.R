@@ -6,7 +6,7 @@ rm(list = ls())
 library("activityinfo")
 
 # Replace 'NA' with the numeric identifier of your database (e.g. 6352):
-database.id <- 8496
+database.id <- 8413
 
 # Uncomment the following command if you want to log in manually, leave commented
 # out if you have stored your login credentials on your local machine.
@@ -38,13 +38,12 @@ subset_data1 = list(
   values[["location.latitude"]],
   values[["location.longitude"]],
   values[["location.alternate_name"]],
-  values[["location.adminlevel.caza.code"]],
-  values[["Site Type"]]
+  values[["location.adminlevel.caza.code"]]
 )
 
 names(subset_data1) <- c("Indicator_ID", "Indicator_Name", "Value", "Unit", "Month", "Partner_Name", "PartnerFullName", 
                          "Governorate", "Caza", "Cadaster", "CadCod","Indicator_Category", "Location_Latitude", 
-                         "Location_Longitude", "locationName", "location.adminlevel.caza.code", "Site_Type")
+                         "Location_Longitude", "locationName", "location.adminlevel.caza.code")
 
 subset_data2 = list(
   values[["indicator.id"]],
@@ -58,19 +57,19 @@ names(subset_data2) <- c("Indicator_ID", "Indicator_Dissegregation",
 # Creating a folder and export the extraction as a csv file to "DBs" folder after creating it in case it doesn't exist
 db.all.lcrp <- values
 
-outfilname<- paste(Sys.Date(), "_Sector_PLP.csv", sep="")
+outfilname<- paste(Sys.Date(), "_Sector_LIVELIHOODS.csv", sep="")
 write.csv(db.all.lcrp, outfilname, row.names=FALSE)
 
 # Creating a folder and export the extraction as a csv file to "UNICEF" folder after creating the folder in case it doesn't exist
 db.12columns.lcrp <- subset_data1
 
-outfilname<- paste(Sys.Date(), "_UNICEF_PBI_PPL.csv", sep="")
+outfilname<- paste(Sys.Date(), "_UNICEF_PBI_LIVELIHOODS.csv", sep="")
 write.csv(db.12columns.lcrp, outfilname, row.names=FALSE)
 cat("Done. The results of UNICEF interventions are in a data frame called 'UNICEF'.\n")
 
 db.6columns.lcrp <- subset_data2
 
-outfilname<- paste(Sys.Date(), "_UNICEF_PLP.csv", sep="")
+outfilname<- paste(Sys.Date(), "_UNICEF_LIVELIHOODS.csv", sep="")
 write.csv(db.6columns.lcrp, outfilname, row.names=FALSE)
 cat("Done. The results of UNICEF interventions are in a data frame called 'UNICEF'.\n")
 
