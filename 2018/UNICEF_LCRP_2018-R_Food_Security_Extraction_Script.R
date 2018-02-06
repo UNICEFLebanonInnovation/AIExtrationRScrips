@@ -38,22 +38,23 @@ subset_data1 = list(
   values[["location.latitude"]],
   values[["location.longitude"]],
   values[["location.alternate_name"]],
-  values[["location.adminlevel.caza.code"]],
-  values[["Site Type"]]
+  values[["location.adminlevel.caza.code"]]
 )
 
 names(subset_data1) <- c("Indicator_ID", "Indicator_Name", "Value", "Unit", "Month", "Partner_Name", "PartnerFullName", 
                          "Governorate", "Caza", "Cadaster", "CadCod","Indicator_Category", "Location_Latitude", 
-                         "Location_Longitude", "locationName", "location.adminlevel.caza.code", "Site_Type")
+                         "Location_Longitude", "locationName", "location.adminlevel.caza.code")
 
 subset_data2 = list(
   values[["indicator.id"]],
-  values[["indicator.name"]],
-  values[["location.adminlevel.governorate"]]
+  values[["indicator.value"]],
+  values[["location.adminlevel.governorate"]],
+  values[["partner.label"]],
+  values[["start_date"]],
+  values[["indicator.name"]]
 )
 
-names(subset_data2) <- c("Indicator_ID", "Indicator_Dissegregation", 
-                         "Location")
+names(subset_data2) <- c("IndicatorID", "Value", "Governorate", "Partner_Name", "Month", "Indicator_Name")
 
 # Creating a folder and export the extraction as a csv file to "DBs" folder after creating it in case it doesn't exist
 db.all.lcrp <- values
