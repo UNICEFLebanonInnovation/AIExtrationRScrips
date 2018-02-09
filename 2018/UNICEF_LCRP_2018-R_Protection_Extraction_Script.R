@@ -14,13 +14,15 @@ database.id <- 8420
 if (is.na(database.id)) {
   stop("you forgot to set the database identifier at the top of this script!")
 }
-values <- getDatabaseValueTable(database.id)
+values <- getDatabaseValueTable(database.id, col.names = c("Funded by" = "Funded_by"))
 
 # Generating values dataframe 
 cat("Done. The results are in a data frame called 'values'.\n")
 
 # Subsetting Values to UNICEF interventions dataset only 
 values$start_date <-strftime(values$start_date,"%Y-%m")
+sector_values <- values
+values <- values[values$Funded_by=="UNICEF",]
 
 subset_data1 = list(
   values[["indicator.id"]],
@@ -57,7 +59,7 @@ subset_data2 = list(
 names(subset_data2) <- c("IndicatorID", "Value", "Governorate", "Partner_Name", "Month", "Indicator_Name")
 
 # Creating a folder and export the extraction as a csv file to "DBs" folder after creating it in case it doesn't exist
-db.all.lcrp <- values
+db.all.lcrp <- sector_values
 
 outfilname<- paste('../', Sys.Date(), "_Sector_PROTECTION.csv", sep="")
 write.csv(db.all.lcrp, outfilname, row.names=FALSE)
