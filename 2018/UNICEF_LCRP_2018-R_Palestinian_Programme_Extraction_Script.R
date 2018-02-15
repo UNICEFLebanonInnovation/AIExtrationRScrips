@@ -22,7 +22,6 @@ cat("Done. The results are in a data frame called 'values'.\n")
 # Subsetting Values to UNICEF interventions dataset only 
 values$start_date <-strftime(values$start_date,"%Y-%m")
 sector_values <- values
-values <- values[values$Funded_by=="UNICEF",]
 
 subset_data1 = list(
   values[["indicator.id"]],
