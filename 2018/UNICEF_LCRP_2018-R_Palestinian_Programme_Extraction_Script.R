@@ -61,7 +61,7 @@ names(subset_data2) <- c("IndicatorID", "Value", "Governorate", "Partner_Name", 
 # Creating a folder and export the extraction as a csv file to "DBs" folder after creating it in case it doesn't exist
 db.all.lcrp <- sector_values
 
-outfilname<- paste('../', Sys.Date(), "_Sector_PLP.csv", sep="")
+outfilname<- paste('../', Sys.Date(), "_Sector_PPL.csv", sep="")
 write.csv(db.all.lcrp, outfilname, row.names=FALSE)
 
 # Creating a folder and export the extraction as a csv file to "UNICEF" folder after creating the folder in case it doesn't exist
@@ -73,7 +73,7 @@ cat("Done. The results of UNICEF interventions are in a data frame called 'UNICE
 
 db.6columns.lcrp <- subset_data2
 
-outfilname<- paste('../', Sys.Date(), "_UNICEF_PLP.csv", sep="")
+outfilname<- paste('../', Sys.Date(), "_UNICEF_PPL.csv", sep="")
 write.csv(db.6columns.lcrp, outfilname, row.names=FALSE)
 cat("Done. The results of UNICEF interventions are in a data frame called 'UNICEF'.\n")
 
