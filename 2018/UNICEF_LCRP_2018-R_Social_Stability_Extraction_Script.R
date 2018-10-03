@@ -40,13 +40,15 @@ subset_data1 = list(
   values[["location.latitude"]],
   values[["location.longitude"]],
   values[["location.alternate_name"]],
-  values[["location.adminlevel.caza.code"]],
-  values[["Site Type"]]
+  values[["location.adminlevel.caza.code"]]
 )
+
+#  values[["Site Type"]]
 
 names(subset_data1) <- c("Indicator_ID", "Indicator_Name", "Value", "Unit", "Month", "Partner_Name", "PartnerFullName", 
                          "Governorate", "Caza", "Cadaster", "CadCod","Indicator_Category", "Location_Latitude", 
-                         "Location_Longitude", "locationName", "location.adminlevel.caza.code", "Site_Type")
+                         "Location_Longitude", "locationName", "location.adminlevel.caza.code")
+#"Site_Type"
 
 subset_data2 = list(
   values[["indicator.id"]],
