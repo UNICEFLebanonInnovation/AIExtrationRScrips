@@ -24,7 +24,10 @@ values$start_date <-strftime(values$start_date,"%Y-%m")
 sector_values <- values
 
 subset_data1 = list(
-  values[["form"]],
+  values[["indicator.id"]],
+  values[["indicator.name"]],
+  values[["indicator.value"]],
+  values[["indicator.units"]],
   values[["start_date"]],
   values[["partner.label"]],
   values[["partner.description"]],
@@ -32,7 +35,7 @@ subset_data1 = list(
   values[["location.adminlevel.caza"]],
   values[["location.adminlevel.cadastral_area"]],
   values[["location.adminlevel.cadastral_area.code"]],
-  values[["form.category"]],
+  values[["indicator.category"]],
   values[["location.latitude"]],
   values[["location.longitude"]],
   values[["location.alternate_name"]],
@@ -40,7 +43,7 @@ subset_data1 = list(
   values[["Site Type"]]
 )
 
-names(subset_data1) <- c("Indicator_Name", "Month", "Partner_Name", "PartnerFullName", 
+names(subset_data1) <- c("Indicator_ID", "Indicator_Name", "Value", "Unit", "Month", "Partner_Name", "PartnerFullName", 
                          "Governorate", "Caza", "Cadaster", "CadCod","Indicator_Category", "Location_Latitude", 
                          "Location_Longitude", "locationName", "location.adminlevel.caza.code", "Site_Type")
 
