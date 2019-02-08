@@ -6,7 +6,7 @@ rm(list = ls())
 library("activityinfo")
 
 # Replace 'NA' with the numeric identifier of your database (e.g. 6352):
-database.id <- 8403
+database.id <- 10166
 
 # Uncomment the following command if you want to log in manually, leave commented
 # out if you have stored your login credentials on your local machine.
@@ -40,13 +40,12 @@ subset_data1 = list(
   values[["location.latitude"]],
   values[["location.longitude"]],
   values[["location.alternate_name"]],
-  values[["location.adminlevel.caza.code"]],
-  values[["Public Institutions"]] # site type
+  values[["location.adminlevel.caza.code"]]
 )
 
 names(subset_data1) <- c("Indicator_ID", "Indicator_Name", "Value", "Unit", "Month", "Partner_Name", "PartnerFullName", 
                          "Governorate", "Caza", "Cadaster", "CadCod","Indicator_Category", "Location_Latitude", 
-                         "Location_Longitude", "locationName", "location.adminlevel.caza.code", "Site_Type")
+                         "Location_Longitude", "locationName", "location.adminlevel.caza.code")
 
 subset_data2 = list(
   values[["indicator.id"]],

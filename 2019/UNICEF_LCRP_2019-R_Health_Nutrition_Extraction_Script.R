@@ -6,7 +6,7 @@ rm(list = ls())
 library("activityinfo")
 
 # Replace 'NA' with the numeric identifier of your database (e.g. 6352):
-database.id <- 8568
+database.id <- 10121
 
 # Uncomment the following command if you want to log in manually, leave commented
 # out if you have stored your login credentials on your local machine.
