@@ -14,7 +14,7 @@ database.id <- 10167
 if (is.na(database.id)) {
   stop("you forgot to set the database identifier at the top of this script!")
 }
-values <- getDatabaseValueTable(database.id, col.names = c("Funded by" = "Funded_by"))
+values <- getDatabaseValueTable(database.id)
 
 # Generating values dataframe 
 cat("Done. The results are in a data frame called 'values'.\n")
